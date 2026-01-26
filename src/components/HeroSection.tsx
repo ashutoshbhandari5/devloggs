@@ -3,6 +3,7 @@ import { BrutalButton } from "./brutal/BrutalButton";
 import { BrutalBadge } from "./brutal/BrutalBadge";
 import { PhaseLabel } from "./brutal/PhaseLabel";
 import { SocialProof } from "./SocialProof";
+import { HeroDemoSection } from "./HeroDemoSection";
 import { ArrowRight, Clock, Brain, FileX } from "lucide-react";
 
 export const HeroSection = () => {
@@ -64,13 +65,16 @@ export const HeroSection = () => {
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <BrutalButton variant="primary" size="lg">
-            Break Free Now
+            Create Your Portfolio
             <ArrowRight className="ml-2 w-5 h-5 inline" />
           </BrutalButton>
           <BrutalButton variant="outline" size="lg">
-            See Demo
+            See How It Works
           </BrutalButton>
         </motion.div>
+
+        {/* Interactive Demo Section */}
+        <HeroDemoSection />
       </div>
     </section>
   );
