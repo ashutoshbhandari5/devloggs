@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
-import { TerminalWindow } from "./brutal/TerminalWindow";
-import { User } from "lucide-react";
+import { PhaseLabel } from "./brutal/PhaseLabel";
+import { Github, Code2, MessageSquare, FileText, ExternalLink, HelpCircle } from "lucide-react";
 
-const applicants = [
-  { name: "candidate_4821.pdf", skills: "React, Node.js, Python", match: "87%" },
-  { name: "candidate_4822.pdf", skills: "React, Node.js, Python", match: "85%" },
-  { name: "candidate_4823.pdf", skills: "React, TypeScript, AWS", match: "84%" },
-  { name: "YOU", skills: "React, Node.js, Python", match: "86%", highlight: true },
-  { name: "candidate_4825.pdf", skills: "React, Node.js, MongoDB", match: "83%" },
-  { name: "candidate_4826.pdf", skills: "Vue, Node.js, Python", match: "82%" },
+const scatteredLinks = [
+  { icon: Github, label: "GitHub", url: "github.com/johndoe", color: "bg-foreground text-card" },
+  { icon: Code2, label: "LeetCode", url: "leetcode.com/johndoe", color: "bg-brutal-yellow text-foreground" },
+  { icon: MessageSquare, label: "StackOverflow", url: "stackoverflow.com/users/123", color: "bg-brutal-orange text-card" },
+  { icon: FileText, label: "Dev.to", url: "dev.to/johndoe", color: "bg-brutal-blue text-card" },
+  { icon: ExternalLink, label: "Portfolio", url: "johndoe.dev", color: "bg-brutal-purple text-card" },
+  { icon: ExternalLink, label: "Projects", url: "projects.johndoe.dev", color: "bg-brutal-green text-card" },
 ];
 
 export const ProblemSection = () => {
@@ -22,71 +22,72 @@ export const ProblemSection = () => {
           transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
+          <PhaseLabel 
+            phase="THE PROBLEM" 
+            title="SCATTERED & UNVERIFIED" 
+            accentColor="destructive"
+            className="justify-center mb-8"
+          />
+
           <h2 className="text-4xl md:text-5xl font-mono font-bold uppercase text-foreground">
-            Spot Yourself In The{" "}
-            <span className="brutal-highlight">Noise</span>
+            Links Everywhere.{" "}
+            <span className="brutal-highlight">Zero Validation.</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-            This is what recruiters see. Can you find yourself?
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Typical dev portfolios: 6 different links, no proof it's actually your work. 
+            How can hiring managers trust what they're seeing?
           </p>
         </motion.div>
 
+        {/* Scattered links visualization */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto mb-12"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {scatteredLinks.map((link, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: index % 2 === 0 ? 1 : -1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.1 * index }}
+                className="bg-card brutal-border-2 brutal-shadow-sm p-4 relative"
+              >
+                <div className={`w-10 h-10 ${link.color} brutal-border-2 flex items-center justify-center mb-3`}>
+                  <link.icon className="w-5 h-5" />
+                </div>
+                <p className="font-mono text-sm font-bold">{link.label}</p>
+                <p className="font-mono text-xs text-muted-foreground truncate">{link.url}</p>
+                
+                {/* Question mark - unverified indicator */}
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-destructive brutal-border-2 rounded-full flex items-center justify-center">
+                  <HelpCircle className="w-3 h-3 text-destructive-foreground" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-3xl mx-auto"
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="text-center"
         >
-          <TerminalWindow title="applicants.exe">
-            <div className="p-4">
-              {/* Table header */}
-              <div className="grid grid-cols-12 gap-4 px-4 py-2 bg-foreground text-card font-mono text-xs uppercase tracking-wider border-b-2 border-foreground">
-                <div className="col-span-5">File Name</div>
-                <div className="col-span-5">Skills Detected</div>
-                <div className="col-span-2 text-right">Match %</div>
-              </div>
-
-              {/* Applicant rows */}
-              {applicants.map((applicant, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.1 * index }}
-                  className={`grid grid-cols-12 gap-4 px-4 py-3 font-mono text-sm border-b-2 border-secondary ${
-                    applicant.highlight
-                      ? "bg-primary/10 border-l-4 border-l-primary"
-                      : ""
-                  }`}
-                >
-                  <div className="col-span-5 flex items-center gap-2">
-                    {applicant.highlight ? (
-                      <>
-                        <User className="w-4 h-4 text-primary" />
-                        <span className="font-bold text-primary">{applicant.name}</span>
-                      </>
-                    ) : (
-                      <span className="text-muted-foreground">{applicant.name}</span>
-                    )}
-                  </div>
-                  <div className={`col-span-5 ${applicant.highlight ? "text-foreground" : "text-muted-foreground"}`}>
-                    {applicant.skills}
-                  </div>
-                  <div className={`col-span-2 text-right font-bold ${applicant.highlight ? "text-primary" : "text-muted-foreground"}`}>
-                    {applicant.match}
-                  </div>
-                </motion.div>
-              ))}
-
-              {/* Footer */}
-              <div className="px-4 py-4 bg-secondary/50 font-mono text-sm text-muted-foreground flex items-center justify-between">
-                <span>+ 242 identical profiles pending review...</span>
-                <span className="text-destructive font-bold">▌ SCANNING...</span>
-              </div>
-            </div>
-          </TerminalWindow>
+          <div className="inline-block bg-card brutal-border brutal-shadow p-6 max-w-xl">
+            <p className="font-mono text-lg text-foreground mb-2">
+              🤔 <span className="font-bold">"Is this really their code?"</span>
+            </p>
+            <p className="text-muted-foreground">
+              Anyone can link to a GitHub repo. How do hiring managers know you actually contributed? 
+              That you solved those LeetCode problems? That those StackOverflow answers are yours?
+            </p>
+          </div>
         </motion.div>
 
         <motion.p
@@ -96,7 +97,7 @@ export const ProblemSection = () => {
           transition={{ duration: 0.4, delay: 0.5 }}
           className="text-center mt-8 font-mono text-lg text-foreground"
         >
-          Hard to find yourself, right? <span className="text-primary font-bold">That's the problem.</span>
+          Scattered links + no verification = <span className="text-destructive font-bold">Zero trust.</span>
         </motion.p>
       </div>
     </section>
