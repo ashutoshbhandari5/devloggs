@@ -1,184 +1,140 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Code, FileText, MessageSquare, TrendingUp } from "lucide-react";
+import { TerminalWindow } from "./brutal/TerminalWindow";
+import { BrutalBadge } from "./brutal/BrutalBadge";
+import { Github, Code2, Trophy, MessageSquare } from "lucide-react";
 
-const mockStats = [
-  { label: "Total Stars", value: "1", icon: "⭐" },
-  { label: "Total Commits", value: "345", icon: "📝" },
-  { label: "Total PRs", value: "56", icon: "🔀" },
-  { label: "Total Issues", value: "0", icon: "🎯" },
-  { label: "PR Reviews", value: "0", icon: "👀" },
-  { label: "Contributed to", value: "2", icon: "🤝" },
-  { label: "Total Repos", value: "45", icon: "📁" },
+const stats = [
+  { label: "Commits", value: "1,247", trend: "+12%" },
+  { label: "PRs Merged", value: "89", trend: "+8%" },
+  { label: "Stars", value: "156", trend: "+23%" },
+  { label: "Languages", value: "7", trend: "" },
 ];
 
-const leetCodeDays = Array.from({ length: 35 }, (_, i) => ({
-  active: Math.random() > 0.6,
-  intensity: Math.floor(Math.random() * 4),
-}));
+const languages = [
+  { name: "TypeScript", percentage: 45, color: "bg-brutal-blue" },
+  { name: "Python", percentage: 25, color: "bg-brutal-yellow" },
+  { name: "Rust", percentage: 15, color: "bg-brutal-orange" },
+  { name: "Go", percentage: 15, color: "bg-brutal-green" },
+];
+
+const achievements = [
+  "100 Day Streak 🔥",
+  "Open Source Hero",
+  "Bug Crusher",
+  "Code Reviewer",
+];
 
 export const DemoSection = () => {
   return (
-    <section className="py-20 relative">
+    <section className="py-24 bg-secondary/30 grid-pattern">
       <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-8"
+          transition={{ duration: 0.4 }}
+          className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 text-primary mb-4">
-            <Sparkles className="w-5 h-5" />
-            <span className="text-sm font-medium">Interactive demo</span>
-          </div>
-          <p className="text-muted-foreground">
-            www.devlogg.co/ashutoshbhandari5 •{" "}
-            <span className="text-primary">Try it! People love exploring</span>
+          <h2 className="text-4xl md:text-5xl font-mono font-bold uppercase text-foreground">
+            Your <span className="brutal-highlight">Living</span> Portfolio
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Real data. Real proof. Real impact.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="browser-frame max-w-5xl mx-auto overflow-hidden"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="max-w-4xl mx-auto"
         >
-          {/* Browser header */}
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-400" />
-              <div className="w-3 h-3 rounded-full bg-yellow-400" />
-              <div className="w-3 h-3 rounded-full bg-green-400" />
-            </div>
-            <div className="flex-1 flex items-center justify-center">
-              <div className="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-secondary text-sm text-muted-foreground">
-                <span>www.devlogg.co/</span>
-                <span className="text-foreground font-medium">ashutoshbhandari5</span>
-              </div>
-            </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground" />
-          </div>
-
-          {/* Portfolio content */}
-          <div className="p-6 bg-card">
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Profile card */}
-              <div className="bg-secondary/50 rounded-xl p-6 space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-primary-foreground text-2xl font-bold">
-                    AB
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-foreground text-lg">Ashutosh Bhandari</h3>
-                    <p className="text-muted-foreground text-sm">Developer</p>
-                  </div>
+          <TerminalWindow title="devlogg.profile">
+            <div className="p-6">
+              {/* Header */}
+              <div className="flex flex-wrap items-center gap-4 mb-6 pb-6 border-b-3 border-foreground">
+                <div className="w-16 h-16 bg-primary brutal-border flex items-center justify-center">
+                  <span className="text-2xl font-mono font-bold text-primary-foreground">JD</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  📍 Columbus, Ohio
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Aspiring data scientist with a strong foundation in machine learning and software development.
-                </p>
-
-                <div className="pt-4 border-t border-border">
-                  <h4 className="font-semibold text-foreground mb-2">Education</h4>
-                  <p className="text-sm font-medium text-foreground">Wright State University</p>
-                  <p className="text-xs text-muted-foreground">Masters in Data Science</p>
-                  <p className="text-xs text-muted-foreground">Jan 2023 - Jan 2026</p>
+                <div>
+                  <h3 className="text-2xl font-mono font-bold uppercase">John Developer</h3>
+                  <p className="text-muted-foreground font-mono">Full-Stack Engineer • 3 YOE</p>
+                </div>
+                <div className="flex flex-wrap gap-2 ml-auto">
+                  <BrutalBadge variant="default" icon={<Github className="w-3 h-3" />}>GitHub</BrutalBadge>
+                  <BrutalBadge variant="default" icon={<Code2 className="w-3 h-3" />}>LeetCode</BrutalBadge>
+                  <BrutalBadge variant="default" icon={<MessageSquare className="w-3 h-3" />}>StackOverflow</BrutalBadge>
                 </div>
               </div>
 
-              {/* GitHub stats */}
-              <div className="bg-secondary/50 rounded-xl p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <Github className="w-5 h-5 text-foreground" />
-                  <h4 className="font-semibold text-foreground">GitHub Contributions</h4>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {mockStats.slice(0, 6).map((stat, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <span className="text-xs">{stat.icon}</span>
-                      <div>
-                        <p className="text-xs text-muted-foreground">{stat.label}</p>
-                        <p className="font-semibold text-foreground">{stat.value}</p>
+              {/* Stats grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: 0.1 * index }}
+                    className="bg-secondary brutal-border-2 brutal-shadow-sm p-4 text-center"
+                  >
+                    <p className="text-3xl font-mono font-bold text-foreground">{stat.value}</p>
+                    <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-1">{stat.label}</p>
+                    {stat.trend && (
+                      <p className="text-xs font-mono text-brutal-green font-bold mt-1">{stat.trend}</p>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Languages */}
+              <div className="mb-6">
+                <h4 className="font-mono text-sm uppercase tracking-wider font-bold mb-4">Languages</h4>
+                <div className="space-y-3">
+                  {languages.map((lang, index) => (
+                    <div key={index} className="flex items-center gap-4">
+                      <span className="w-24 font-mono text-sm">{lang.name}</span>
+                      <div className="flex-1 h-6 bg-secondary brutal-border-2 overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${lang.percentage}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: 0.1 * index }}
+                          className={`h-full ${lang.color}`}
+                        />
                       </div>
+                      <span className="font-mono text-sm font-bold w-12 text-right">{lang.percentage}%</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* LeetCode & Dev.to */}
-              <div className="space-y-4">
-                <div className="bg-secondary/50 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Code className="w-5 h-5 text-amber-500" />
-                    <h4 className="font-semibold text-foreground">LeetCode Stats</h4>
-                  </div>
-                  <div className="flex flex-wrap gap-1 mb-2">
-                    {leetCodeDays.map((day, i) => (
-                      <div
-                        key={i}
-                        className={`w-3 h-3 rounded-sm ${
-                          day.active
-                            ? day.intensity > 2
-                              ? "bg-green-500"
-                              : day.intensity > 1
-                              ? "bg-green-400"
-                              : "bg-green-300"
-                            : "bg-secondary"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-sm font-semibold text-foreground">8 Problems Solved</p>
-                </div>
-
-                <div className="bg-secondary/50 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-3">
-                    <FileText className="w-5 h-5 text-foreground" />
-                    <h4 className="font-semibold text-foreground">Dev.to Stats</h4>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div>
-                      <p className="text-muted-foreground">Articles</p>
-                      <p className="font-semibold text-foreground">2</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">Avg Reactions</p>
-                      <p className="font-semibold text-foreground">1.0</p>
-                    </div>
-                  </div>
+              {/* Achievements */}
+              <div>
+                <h4 className="font-mono text-sm uppercase tracking-wider font-bold mb-4 flex items-center gap-2">
+                  <Trophy className="w-4 h-4 text-brutal-yellow" />
+                  Achievements
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {achievements.map((achievement, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.1 * index }}
+                      className="px-3 py-2 bg-accent brutal-border-2 brutal-shadow-sm font-mono text-sm font-bold"
+                    >
+                      {achievement}
+                    </motion.span>
+                  ))}
                 </div>
               </div>
             </div>
-
-            {/* Growth chart placeholder */}
-            <div className="mt-6 bg-secondary/50 rounded-xl p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <TrendingUp className="w-5 h-5 text-primary" />
-                <h4 className="font-semibold text-foreground">Developer Growth</h4>
-                <span className="ml-auto text-sm text-muted-foreground">433 Contributions in last 12 months</span>
-              </div>
-              <div className="h-24 flex items-end gap-1">
-                {Array.from({ length: 52 }, (_, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 bg-primary/20 rounded-t"
-                    style={{ height: `${20 + Math.random() * 80}%` }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+          </TerminalWindow>
         </motion.div>
       </div>
     </section>
   );
 };
-
-const Sparkles = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 3L13.5 8.5L19 10L13.5 11.5L12 17L10.5 11.5L5 10L10.5 8.5L12 3Z" fill="currentColor"/>
-  </svg>
-);
