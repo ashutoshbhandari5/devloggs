@@ -38,7 +38,7 @@ export const DemoSection = () => {
           <h2 className="text-4xl md:text-5xl font-mono font-bold uppercase text-foreground">
             Your <span className="brutal-highlight">Living</span> Portfolio
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-lg text-foreground/70 font-medium">
             Real data. Real proof. Real impact.
           </p>
         </motion.div>

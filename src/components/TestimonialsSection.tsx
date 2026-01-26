@@ -50,8 +50,8 @@ export const TestimonialsSection = () => {
           <h2 className="text-4xl md:text-5xl font-mono font-bold uppercase text-foreground">
             Real <span className="brutal-highlight">Stories</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Developers who escaped the PDF graveyard
+          <p className="mt-4 text-lg text-foreground/70 font-medium">
+            Developers who leveled up their online presence
           </p>
         </motion.div>
 
