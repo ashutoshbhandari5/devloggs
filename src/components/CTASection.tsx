@@ -46,12 +46,14 @@ export const CTASection = () => {
           />
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-mono font-bold uppercase leading-tight">
-            Your Next Opportunity Is{" "}
-            <span className="text-accent">One Portfolio Away</span>
+            This Is{" "}
+            <span className="text-accent">Who I Am.</span>
+            <br />
+            <span className="text-card/80">Verified.</span>
           </h2>
 
           <p className="mt-6 text-lg text-card/80 max-w-xl mx-auto">
-            Every day you wait is a recruiter who doesn't see your work. Create your DevLogg profile now.
+            Stop explaining yourself with scattered links. Let your consolidated, AI-verified profile speak for you — on the internet, to hiring managers, and beyond.
           </p>
 
           <motion.div
