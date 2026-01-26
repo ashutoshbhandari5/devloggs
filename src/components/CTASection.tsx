@@ -11,8 +11,26 @@ const benefits = [
 
 export const CTASection = () => {
   return (
-    <section className="py-24 bg-foreground text-card grid-pattern">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-foreground text-card grid-pattern relative overflow-hidden">
+      {/* Animated background squares */}
+      <motion.div
+        animate={{ 
+          rotate: [0, 90],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute -top-20 -right-20 w-64 h-64 border-4 border-card/10"
+      />
+      <motion.div
+        animate={{ 
+          rotate: [0, -90],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="absolute -bottom-32 -left-32 w-96 h-96 border-4 border-card/10"
+      />
+
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,10 +62,17 @@ export const CTASection = () => {
             className="mt-8 flex flex-wrap items-center justify-center gap-4"
           >
             {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-2 text-sm text-card/70">
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                className="flex items-center gap-2 text-sm text-card/70"
+              >
                 <CheckCircle2 className="w-4 h-4 text-accent" />
                 <span>{benefit.text}</span>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
 

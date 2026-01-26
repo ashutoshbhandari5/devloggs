@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { BrutalCard } from "./brutal/BrutalCard";
-import { Github, Link, Sparkles, Share2 } from "lucide-react";
+import { Github, Link, Sparkles, Share2, ArrowRight } from "lucide-react";
 
 const steps = [
   {
@@ -52,7 +52,18 @@ export const HowItWorksSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          {/* Connecting line - desktop only */}
+          <div className="hidden lg:block absolute top-[4.5rem] left-[12%] right-[12%] h-0.5 bg-foreground/20">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="h-full bg-foreground origin-left"
+            />
+          </div>
+
           {steps.map((step, index) => (
             <motion.div
               key={index}
@@ -60,17 +71,36 @@ export const HowItWorksSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="relative"
             >
-              <BrutalCard hover className="h-full p-6">
-                <div className={`w-14 h-14 ${step.accent} brutal-border flex items-center justify-center mb-6`}>
+              <BrutalCard tiltOnHover className="h-full p-6">
+                {/* Step number with pulse animation on hover */}
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className={`w-14 h-14 ${step.accent} brutal-border flex items-center justify-center mb-6 relative z-10`}
+                >
                   <span className="font-mono font-bold text-xl">{step.number}</span>
-                </div>
+                </motion.div>
+                
                 <div className="w-12 h-12 bg-secondary brutal-border-2 flex items-center justify-center mb-4">
                   <step.icon className="w-6 h-6" />
                 </div>
                 <h3 className="font-mono font-bold text-lg uppercase mb-2">{step.title}</h3>
                 <p className="text-muted-foreground text-sm">{step.description}</p>
               </BrutalCard>
+
+              {/* Arrow between steps - desktop only */}
+              {index < steps.length - 1 && (
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
+                  className="hidden lg:flex absolute -right-3 top-[4rem] z-20 w-6 h-6 bg-accent brutal-border-2 items-center justify-center"
+                >
+                  <ArrowRight className="w-3 h-3" />
+                </motion.div>
+              )}
             </motion.div>
           ))}
         </div>
