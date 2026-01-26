@@ -2,6 +2,21 @@ import { motion } from "framer-motion";
 import { Code2 } from "lucide-react";
 import { BrutalButton } from "./brutal/BrutalButton";
 
+const navLinks = [
+  { label: "Demo", href: "#demo" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
+];
+
+const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  const element = document.querySelector(href);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
+
 export const Navbar = () => {
   return (
     <motion.nav
@@ -19,6 +34,22 @@ export const Navbar = () => {
             DevLogg
           </span>
         </div>
+
+        {/* Navigation Links */}
+        <div className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => scrollToSection(e, link.href)}
+              className="font-mono text-sm uppercase tracking-wider font-bold text-muted-foreground hover:text-foreground transition-colors relative group"
+            >
+              {link.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full" />
+            </a>
+          ))}
+        </div>
+
         <BrutalButton variant="primary" size="sm">
           Login
         </BrutalButton>
