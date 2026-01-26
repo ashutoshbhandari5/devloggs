@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['Space Mono', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -60,11 +61,28 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        brutal: {
+          black: "hsl(var(--brutal-black))",
+          white: "hsl(var(--brutal-white))",
+          yellow: "hsl(var(--brutal-yellow))",
+          purple: "hsl(var(--brutal-purple))",
+          blue: "hsl(var(--brutal-blue))",
+          green: "hsl(var(--brutal-green))",
+          red: "hsl(var(--brutal-red))",
+          pink: "hsl(var(--brutal-pink))",
+          orange: "hsl(var(--brutal-orange))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        'brutal-sm': 'var(--shadow-brutal-sm)',
+        'brutal': 'var(--shadow-brutal)',
+        'brutal-lg': 'var(--shadow-brutal-lg)',
+        'brutal-xl': 'var(--shadow-brutal-xl)',
       },
       keyframes: {
         "accordion-down": {
@@ -87,23 +105,23 @@ export default {
           from: { opacity: "0", transform: "scale(0.95)" },
           to: { opacity: "1", transform: "scale(1)" },
         },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
+        "slide-up": {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
-        pulse: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.5" },
+        "brutal-bounce": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-4px)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-up": "fade-up 0.5s ease-out forwards",
+        "fade-up": "fade-up 0.4s ease-out forwards",
         "fade-in": "fade-in 0.3s ease-out forwards",
-        "scale-in": "scale-in 0.3s ease-out forwards",
-        float: "float 6s ease-in-out infinite",
-        pulse: "pulse 2s ease-in-out infinite",
+        "scale-in": "scale-in 0.2s ease-out forwards",
+        "slide-up": "slide-up 0.3s ease-out forwards",
+        "brutal-bounce": "brutal-bounce 0.5s ease-in-out",
       },
     },
   },

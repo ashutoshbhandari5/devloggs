@@ -1,150 +1,122 @@
 import { motion } from "framer-motion";
-import { TrendingUp, Flame, Brain, Code } from "lucide-react";
+import { BrutalCard } from "./brutal/BrutalCard";
+import { TrendingUp, GitCommit, Calendar, Zap } from "lucide-react";
+
+const weeklyData = [
+  { day: "Mon", commits: 12, height: 48 },
+  { day: "Tue", commits: 8, height: 32 },
+  { day: "Wed", commits: 15, height: 60 },
+  { day: "Thu", commits: 22, height: 88 },
+  { day: "Fri", commits: 18, height: 72 },
+  { day: "Sat", commits: 5, height: 20 },
+  { day: "Sun", commits: 10, height: 40 },
+];
 
 const insights = [
   {
     icon: TrendingUp,
-    stat: "+127%",
-    label: "YoY Growth",
-    title: "Growth Trajectory",
-    description: "Track how your skills evolve through real usage, not self-assessments.",
+    title: "Peak Productivity",
+    value: "Thursday @ 2PM",
+    description: "You code best in early afternoon",
+    color: "bg-brutal-green",
   },
   {
-    icon: Flame,
-    stat: "342",
-    label: "Day Streak",
-    title: "Consistency Patterns",
-    description: "Your commit streaks and activity rhythm tell a compelling story.",
+    icon: GitCommit,
+    title: "Commit Style",
+    value: "Atomic",
+    description: "Small, focused commits (avg 42 LOC)",
+    color: "bg-brutal-blue",
   },
   {
-    icon: Brain,
-    stat: "312",
-    label: "Problems",
-    title: "Problem-Solving",
-    description: "LeetCode patterns show how you approach and conquer challenges.",
+    icon: Calendar,
+    title: "Consistency",
+    value: "87%",
+    description: "Days active in the last 90 days",
+    color: "bg-brutal-purple",
   },
   {
-    icon: Code,
-    stat: "8",
-    label: "Languages",
-    title: "Tech Stack Evidence",
-    description: "Real language usage from your repos, verified by actual code.",
+    icon: Zap,
+    title: "Top Language",
+    value: "TypeScript",
+    description: "45% of your contributions",
+    color: "bg-brutal-yellow",
   },
 ];
-
-const languages = [
-  { name: "TypeScript", percent: 45, color: "bg-blue-500" },
-  { name: "Python", percent: 28, color: "bg-yellow-500" },
-  { name: "Rust", percent: 15, color: "bg-orange-500" },
-  { name: "Go", percent: 12, color: "bg-cyan-500" },
-];
-
-const achievements = ["100 Day Streak", "Open Source", "Top 5%", "Prolific"];
 
 export const InsightsSection = () => {
   return (
-    <section className="py-24 bg-secondary/30">
+    <section className="py-24">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
-          <span className="text-primary text-sm font-medium mb-4 block">Rich Insights</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-            Show patterns,{" "}
-            <span className="gradient-text">not bullet points.</span>
+          <h2 className="text-4xl md:text-5xl font-mono font-bold uppercase text-foreground">
+            AI-Powered <span className="brutal-highlight">Insights</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            DevLog extracts meaningful signals from your activity—insights that make recruiters actually understand who you are as a developer.
+          <p className="mt-4 text-lg text-muted-foreground">
+            We analyze your code to reveal patterns recruiters love
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Insights grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {insights.map((insight, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-6 card-shadow border border-border"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl font-bold text-primary">{insight.stat}</span>
-                  <span className="text-xs text-muted-foreground">{insight.label}</span>
-                </div>
-                <h3 className="font-semibold text-foreground mb-1">{insight.title}</h3>
-                <p className="text-sm text-muted-foreground">{insight.description}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Visualization cards */}
+          {/* Weekly Activity Chart */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-4"
+            transition={{ duration: 0.4 }}
           >
-            {/* Activity chart */}
-            <div className="bg-card rounded-2xl p-6 card-shadow border border-border">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="font-semibold text-foreground">Contribution Activity</h4>
-                <span className="text-sm text-muted-foreground">Last 20 weeks</span>
-              </div>
-              <div className="h-24 flex items-end gap-1">
-                {Array.from({ length: 20 }, (_, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 bg-primary rounded-t transition-all hover:bg-primary/80"
-                    style={{ height: `${20 + Math.random() * 80}%`, opacity: 0.3 + Math.random() * 0.7 }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Language usage */}
-            <div className="bg-card rounded-2xl p-6 card-shadow border border-border">
-              <h4 className="font-semibold text-foreground mb-4">Language Usage</h4>
-              <div className="space-y-3">
-                {languages.map((lang) => (
-                  <div key={lang.name} className="flex items-center gap-3">
-                    <span className="text-sm text-foreground w-24">{lang.name}</span>
-                    <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${lang.percent}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className={`h-full ${lang.color} rounded-full`}
-                      />
-                    </div>
-                    <span className="text-sm text-muted-foreground w-12">{lang.percent}%</span>
+            <BrutalCard className="p-6 h-full">
+              <h3 className="font-mono font-bold uppercase text-lg mb-6">Weekly Activity</h3>
+              <div className="flex items-end justify-between gap-3 h-48">
+                {weeklyData.map((data, index) => (
+                  <div key={index} className="flex-1 flex flex-col items-center gap-2">
+                    <motion.div
+                      initial={{ height: 0 }}
+                      whileInView={{ height: data.height }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="w-full bg-primary brutal-border-2"
+                      style={{ minHeight: 8 }}
+                    />
+                    <span className="font-mono text-xs font-bold">{data.commits}</span>
+                    <span className="font-mono text-xs text-muted-foreground">{data.day}</span>
                   </div>
                 ))}
               </div>
-            </div>
+            </BrutalCard>
+          </motion.div>
 
-            {/* Achievements */}
-            <div className="bg-card rounded-2xl p-6 card-shadow border border-border">
-              <h4 className="font-semibold text-foreground mb-4">Achievements</h4>
-              <div className="flex flex-wrap gap-2">
-                {achievements.map((achievement) => (
-                  <span
-                    key={achievement}
-                    className="px-3 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium"
-                  >
-                    {achievement}
-                  </span>
-                ))}
-              </div>
-            </div>
+          {/* Insights Grid */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-2 gap-4"
+          >
+            {insights.map((insight, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <BrutalCard hover className="p-4 h-full">
+                  <div className={`w-10 h-10 ${insight.color} brutal-border-2 flex items-center justify-center mb-3`}>
+                    <insight.icon className="w-5 h-5" />
+                  </div>
+                  <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{insight.title}</p>
+                  <p className="font-mono font-bold text-xl mt-1">{insight.value}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{insight.description}</p>
+                </BrutalCard>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>
