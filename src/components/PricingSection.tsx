@@ -172,7 +172,7 @@ export const PricingSection = () => {
           </span>
           <span className="flex items-center gap-2">
             <Check className="w-4 h-4 text-brutal-green" />
-            Free tier forever
+            Try free, upgrade anytime
           </span>
         </motion.div>
       </div>

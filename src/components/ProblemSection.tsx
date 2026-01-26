@@ -33,7 +33,7 @@ export const ProblemSection = () => {
             Links Everywhere.{" "}
             <span className="brutal-highlight">Zero Validation.</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/70 font-medium max-w-2xl mx-auto">
             Typical dev portfolios: 6 different links, no proof it's actually your work. 
             How can hiring managers trust what they're seeing?
           </p>
